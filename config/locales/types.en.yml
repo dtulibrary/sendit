@@ -1,0 +1,10 @@
+en:
+  tsushin:
+    code:
+      template_type:
+        'email-html': 'E-mail HTML format'
+        'email-text': 'E-mail Text format'
+        'text-sms': 'Text (SMS)'
+        'text-mms': 'Text (MMS)'
+        'msg-facebook': 'Facebook message'
+        'msg-twitter': 'Twitter message'
