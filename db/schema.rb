@@ -60,6 +60,23 @@ ActiveRecord::Schema.define(:version => 20130408063642) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "templates", :force => true do |t|
+    t.string   "code"
+    t.text     "body"
+    t.integer  "template_type_id"
+    t.integer  "template_format_id"
+    t.integer  "template_locale_id"
+    t.datetime "valid_from"
+    t.datetime "valid_until"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "templates", ["code"], :name => "index_templates_on_code"
+  add_index "templates", ["template_format_id"], :name => "index_templates_on_template_format_id"
+  add_index "templates", ["template_locale_id"], :name => "index_templates_on_template_locale_id"
+  add_index "templates", ["template_type_id"], :name => "index_templates_on_template_type_id"
+
   create_table "users", :force => true do |t|
     t.string   "username",   :default => "", :null => false
     t.datetime "created_at",                 :null => false

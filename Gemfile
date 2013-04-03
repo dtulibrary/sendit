@@ -6,6 +6,8 @@ gem 'jquery-rails'
 gem 'activeadmin'
 gem 'devise_cas_authenticatable'
 
+gem 'just-datetime-picker'
+
 # Gems used for assets generation
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
