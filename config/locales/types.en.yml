@@ -11,3 +11,6 @@ en:
       template_locale:
         en: 'English'
         da: 'Danish'
+      template_format:
+        'markdown': 'Markdown'
+        'erb': 'ERB Template'

@@ -17,3 +17,10 @@ end
 ].each do |l|
   TemplateLocale.find_or_create_by_code(l)
 end
+
+[
+  { code: 'markdown' },
+  { code: 'erb' },
+].each do |f|
+  TemplateFormat.find_or_create_by_code(f)
+end
