@@ -11,3 +11,9 @@
 ].each do |t|
   TemplateType.find_or_create_by_code(t)
 end
+
+[
+  { code: 'en' },
+].each do |l|
+  TemplateLocale.find_or_create_by_code(l)
+end

@@ -8,3 +8,6 @@ en:
         'text-mms': 'Text (MMS)'
         'msg-facebook': 'Facebook message'
         'msg-twitter': 'Twitter message'
+      template_locale:
+        en: 'English'
+        da: 'Danish'
