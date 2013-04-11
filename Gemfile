@@ -8,6 +8,8 @@ gem 'devise_cas_authenticatable'
 
 gem 'just-datetime-picker'
 
+gem 'tilt'
+
 # Gems used for assets generation
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

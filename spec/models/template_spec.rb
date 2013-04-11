@@ -39,4 +39,18 @@ describe Template do
     template.name.should eq "translation missing: en.tsushin.code.template."+template.code
   end
 
+  it "creates template from attributes" do
+    template_type = FactoryGirl.create(:template_type)
+    template_format = FactoryGirl.create(:template_format)
+    template_locale = FactoryGirl.create(:template_locale)
+    template = Template.new
+    template.update_attributes({
+      'code' => 'test.attributes',
+      'template_type_id' => template_type.id,
+      'template_format_id' => template_format.id,
+      'template_locale_id' => template_locale.id,
+      'body' => 'Template',
+    })
+    template.save
+  end
 end
