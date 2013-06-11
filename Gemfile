@@ -7,6 +7,7 @@ gem 'bootstrap-sass'
 gem 'hashie'
 gem 'pg'
 gem 'omniauth-cas'
+gem 'gelf'
 gem 'lograge'
 gem 'wice_grid'
 gem 'activeadmin' #unused, but kept because some old migrations depend on it. Remove later.
