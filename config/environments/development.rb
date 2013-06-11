@@ -33,5 +33,9 @@ Tsushin::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  config.assets.debug = false
+end
+
+if File.exists? File.dirname(__FILE__) + '/../application.local.rb'
+  require File.dirname(__FILE__) + '/../application.local.rb'
 end

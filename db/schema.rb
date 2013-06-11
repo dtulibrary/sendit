@@ -11,22 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130408063642) do
+ActiveRecord::Schema.define(:version => 20130604122603) do
 
-  create_table "active_admin_comments", :force => true do |t|
-    t.string   "resource_id",   :null => false
-    t.string   "resource_type", :null => false
-    t.integer  "author_id"
-    t.string   "author_type"
-    t.text     "body"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.string   "namespace"
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
-  add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
-  add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
-  add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "sent_emails", :force => true do |t|
+    t.integer  "template_id"
+    t.text     "to_address"
+    t.text     "data"
+    t.text     "message"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "sent_emails", ["template_id"], :name => "index_sent_emails_on_template_id"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -38,51 +50,19 @@ ActiveRecord::Schema.define(:version => 20130408063642) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
-  create_table "template_formats", :force => true do |t|
-    t.string   "code",       :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "template_formats", ["code"], :name => "index_template_formats_on_code", :unique => true
-
-  create_table "template_locales", :force => true do |t|
-    t.string   "code",       :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "template_locales", ["code"], :name => "index_template_locales_on_code", :unique => true
-
-  create_table "template_types", :force => true do |t|
-    t.string   "code"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "templates", :force => true do |t|
     t.string   "code"
-    t.text     "body"
-    t.integer  "template_type_id"
-    t.integer  "template_format_id"
-    t.integer  "template_locale_id"
-    t.datetime "valid_from"
-    t.datetime "valid_until"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.text     "html"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.text     "subject"
+    t.text     "from"
+    t.text     "plain"
+    t.text     "example"
+    t.boolean  "active",     :default => false
+    t.boolean  "displayed",  :default => true
   end
 
   add_index "templates", ["code"], :name => "index_templates_on_code"
-  add_index "templates", ["template_format_id"], :name => "index_templates_on_template_format_id"
-  add_index "templates", ["template_locale_id"], :name => "index_templates_on_template_locale_id"
-  add_index "templates", ["template_type_id"], :name => "index_templates_on_template_type_id"
-
-  create_table "users", :force => true do |t|
-    t.string   "username",   :default => "", :null => false
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
-  end
-
-  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
 end

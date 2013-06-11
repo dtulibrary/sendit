@@ -64,5 +64,25 @@ module Tsushin
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Config to be overriden by local settings
+    config.stub_authentication = false;
+
+    config.cas = {
+      :host => ''
+    }
+
+    config.authorized_users =  []
+
+    config.action_mailer.delivery_method = :file
+    config.action_mailer.smtp_settings = {
+      :address              => '',
+      :port                 => 587,
+      :user_name            => '',
+      :password             => '',
+      :authentication       => '',
+      :enable_starttls_auto => true }
+    config.action_mailer.perform_deliveries = true
+
   end
 end

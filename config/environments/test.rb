@@ -35,3 +35,7 @@ Tsushin::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 end
+
+if File.exists? File.dirname(__FILE__) + '/../application.local.rb'
+  require File.dirname(__FILE__) + '/../application.local.rb'
+end

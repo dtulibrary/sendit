@@ -15,13 +15,10 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
-require 'mocha'
-require 'factory_girl_rails'
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true
-  config.filter_run :focus
   config.use_transactional_fixtures = true
 
   # Run specs in random order to surface order dependencies. If you find an
@@ -31,7 +28,6 @@ RSpec.configure do |config|
   config.order = 'random'
 
   config.infer_base_class_for_anonymous_controllers = false
-  config.mock_with :mocha
 end
 
 #Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}

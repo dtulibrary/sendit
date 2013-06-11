@@ -1,0 +1,12 @@
+<dl>
+  <dt>Date</dt>
+  <dd><pre><%= @sent_email.created_at %></pre></dd>
+  <dt>To</dt>
+  <dd><pre><%= @sent_email.to_address %></pre></dd>
+  <dt>Template</dt>
+  <dd><pre><%= link_to @sent_email.template.code, @sent_email.template %> (active=<%=@sent_email.template.active %>, displayed=<%=@sent_email.template.displayed %>)</pre></dd>
+  <dt>Data</dt>
+  <dd><pre class="show-data"><%= @sent_email.data %> </pre></dd>
+  <dt>Message</dt>
+  <dd><pre class="show-message"><%= @sent_email.message %></pre></dd>
+</dl>

@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @template.code %></h1>
+
+Active
+<pre>
+<%= @template.active %>
+</pre>
+
+Displayed
+<pre>
+<%= @template.displayed %>
+</pre>
+
+From
+<pre>
+<%= @template.from %>
+</pre>
+
+Subject
+<pre>
+<%= @template.subject %>
+</pre>
+
+Html
+<pre>
+<%= @template.html %>
+</pre>
+
+Plain
+<pre>
+<%= @template.plain %>
+</pre>
+
+Example
+<pre>
+<%= @template.example %>
+</pre>
+
+<%= link_to 'Edit', [:edit, @template], :class => 'btn btn-mini'  %>
+<%= link_to 'Back', templates_path, :class => 'btn btn-mini'  %>

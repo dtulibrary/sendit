@@ -1,32 +1,71 @@
 class Template < ActiveRecord::Base
-  belongs_to :template_type
-  belongs_to :template_format
-  belongs_to :template_locale
-  just_define_datetime_picker :valid_from, :add_to_attr_accessible => true
-  just_define_datetime_picker :valid_until, :add_to_attr_accessible => true
-  attr_accessible :body, :code, :template_format_id, :template_locale_id,
-    :template_type_id
+  attr_accessible :active, :code, :displayed, :example, :from, :html, :plain, :subject
 
-  validates :code, :presence => true
-  validates :body, :presence => true
-  validates :template_type, :presence => true
-  validates :template_format, :presence => true
-  validates :template_locale, :presence => true
-  validates_datetime :valid_from, :allow_nil => true
-  validates_datetime :valid_until, :allow_nil => true
+  validates :code,    :presence => true
+  validates :html,    :presence => true
+  validates :plain,   :presence => true
+  validates :example, :presence => true
+  validates :from,    :presence => true
+  validates :subject, :presence => true
 
-  # TODO: Validate valid_from <= valid_until
-  # TODO: Validate code unique in given timerange
+  has_many :sent_emails
 
-  def name
-    I18n.t code, :scope => 'tsushin.code.template'
+  def self.current(name)
+    Template.where(:code => name, :active => true, :displayed => true).first or raise ActiveRecord::RecordNotFound
   end
 
-  def self.current_template (name, type, locale = nil)
-    now = Time.now
-    type_id = TemplateType.find_by_code(type).id
-    locale_id = TemplateLocale.find_by_code(locale || ::Tsushin::Application::config.i18n.default_locale).id
-    Template.where("code = ? AND template_type_id = ? AND template_locale_id = ? AND valid_from <= ? AND valid_until >= ?",
-       name, type_id, locale_id, now, now).first
+  def current?
+    self.active
   end
+
+  class Context
+    def initialize(hash)
+      mash = Hashie::Mash.new(hash)
+      mash.each_pair do |key, value|
+        instance_variable_set('@' + key.to_s, value)
+      end
+    end
+
+    def get_binding
+      binding
+    end
+  end
+
+  def self.render_erb(erb, hash)
+    context = Context.new(hash).get_binding()
+    ERB.new(erb.gsub("\r\n", "\n"), nil, '-').result(context)
+  end
+
+  def render_from(hash)
+    Template.render_erb(self.from, hash)
+  end
+
+  def render_subject(hash)
+    Template.render_erb(self.subject, hash)
+  end
+
+  def render_html(hash)
+    Template.render_erb(self.html, hash)
+  end
+
+  def render_plain(hash)
+    Template.render_erb(self.plain, hash)
+  end
+
+
+  class TemplateMailer < ActionMailer::Base
+    def email(template, data)
+      mail(:from         => template.render_from(data),
+           :to           => data["to"],
+           :subject      => template.render_subject(data)) do |format|
+        format.text { render :text => template.render_plain(data) }
+        format.html { render :text => template.render_html(data) }
+      end
+    end
+  end
+
+  def to_email(hash)
+    TemplateMailer.email(self, hash)
+  end
+
 end

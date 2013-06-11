@@ -1,0 +1,25 @@
+<%= grid(@sent_grid) do |g|
+  g.column :name => 'Date', :attribute => 'created_at' do |sent|
+    sent.created_at
+  end
+
+  g.column :name => 'To', :attribute => 'to_address' do |sent|
+    sent.to_address
+  end
+
+  g.column :name => 'Template', :attribute => 'code', :model => 'Template' do |sent|
+    sent.template.code
+  end
+
+  g.column :name => 'Data', :attribute => 'data' do |sent|
+    content_tag :pre, sent.data, :class => 'index-data'
+  end
+
+  g.column :name => 'Message', :attribute => 'message' do |sent|
+    content_tag :pre, sent.message, :class => 'index-message'
+  end
+
+  g.column do |sent|
+    link_to('Show', sent_email_path(sent))
+  end
+end -%>

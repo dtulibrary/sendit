@@ -2,52 +2,42 @@ source 'https://rubygems.org'
 
 gem 'rails'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'bootstrap-sass'
+gem 'hashie'
+gem 'pg'
+gem 'omniauth-cas'
+gem 'lograge'
+gem 'wice_grid'
+gem 'activeadmin' #unused, but kept because some old migrations depend on it. Remove later.
 
-gem 'activeadmin'
-gem 'devise_cas_authenticatable'
-
-gem 'just-datetime-picker'
-
-gem 'tilt'
+gem 'daemons'
+gem 'delayed_job_active_record'
+gem "delayed_job_web"
 
 # Gems used for assets generation
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
-
   gem 'uglifier', '>= 1.0.3'
 end
 
 group :development do
   gem 'railties'
   gem 'rails_best_practices'
-  gem 'debugger'
 end
 
 group :test, :development do
   gem 'sqlite3'
   gem 'rspec-rails'
-  # Static analysis for security vulnerabilities.
+
   gem 'brakeman', :require => false
   gem 'simplecov', :require => false
   gem 'simplecov-html', :require => false
   gem 'simplecov-rcov', :require => false
-end
-
-group :test do
-  gem 'mocha', :require => false
-  gem 'factory_girl_rails'
-end
-
-group :production do
-  gem 'pg'
+  gem 'debugger'
 end
 
 # Deploy with Capistrano
 gem 'capistrano'
-
-gem 'validates_timeliness'
-

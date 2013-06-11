@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="span12">
+  </div>
+</div>
+<%= form_for @template, :remote => true do |f| %>
+<div class="row">
+  <div class="span7">
+    <%= f.text_field :code, :style => 'width: 96%' %>
+    <%= f.text_field :from, :style => 'width: 96%' %>
+    <%= f.text_field :subject, :style => 'width: 96%' %>
+    <div class="tabbable">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab-html" data-toggle="tab">HTML</a></li>
+        <li><a href="#tab-plain" data-toggle="tab">Plain</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab-html">
+          <%= f.text_area :html, :style => 'width: 96%; height: 300px' %>
+        </div>
+        <div class="tab-pane" id="tab-plain">
+          <%= f.text_area :plain, :style => 'width: 96%; height: 300px' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="span5">
+    <%= f.text_area :example, :style => 'width: 96%; height: 400px' %>
+    <%= text_field_tag :to, '', :style => 'width: 96%' %>
+  </div>
+</div>
+<div class="row">
+  <div class="span1">
+    <p><%= link_to '<<', :templates, :class => 'btn' %></p>
+  </div>
+  <div class="span7">
+    <p><button id="try-it" class="btn btn-success" style="width: 100%">Try It!</button></p>
+  </div>
+  <div class="span2">
+    <p><button id="send-it" class="btn btn-warning" style="width: 100%">Send It!</button></p>
+    <div id="sent-alert"></div>
+  </div>
+  <div class="span2">
+    <p><%= f.submit 'Save It!', :confirm => 'Are you sure?', :class => 'btn btn-danger', :style => 'width: 100%;' %></p>
+    <div id="saved-alert"></div>
+  </div>
+</div>
+<% end %>
+<div class="row">
+  <div class="span12">
+    <div class="tabbable">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab1" data-toggle="tab">HTML</a></li>
+        <li><a href="#tab2" data-toggle="tab">Plain</a></li>
+        <li><a href="#tab3" data-toggle="tab">Raw</a></li>
+        <li><a href="#tab4" data-toggle="tab">Errors</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab1">
+          <div id="html-from"></div>
+          <div id="html-subject"></div>
+          <iframe id="html-body" src="about:blank" style="border: 1px solid grey; width:99%"></iframe>
+        </div>
+        <div class="tab-pane" id="tab2">
+          <div id="plain-from"></div>
+          <div id="plain-subject"></div>
+          <pre id="plain-body"></pre>
+        </div>
+        <div class="tab-pane" id="tab3">
+          <pre id="raw"></pre>
+        </div>
+        <div class="tab-pane" id="tab4" style="border: 1px solid red;">
+          <iframe id="errors" src="about:blank" style="border: none; width:99%"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
