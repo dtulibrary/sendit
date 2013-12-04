@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails'
+gem 'rails', '3.2.16'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'bootstrap-sass'
@@ -10,6 +10,7 @@ gem 'omniauth-cas'
 gem 'gelf'
 gem 'lograge'
 gem 'wice_grid'
+gem 'diff-lcs'
 gem 'activeadmin' #unused, but kept because some old migrations depend on it. Remove later.
 
 gem 'daemons'
