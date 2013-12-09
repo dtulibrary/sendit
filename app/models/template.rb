@@ -55,9 +55,12 @@ class Template < ActiveRecord::Base
 
   class TemplateMailer < ActionMailer::Base
     def email(template, data)
-      mail(:from         => template.render_from(data),
-           :to           => data["to"],
-           :subject      => template.render_subject(data)) do |format|
+      mail(:from                      => template.render_from(data),
+           :to                        => data["to"],
+           :subject                   => template.render_subject(data),
+           'X-Auto-Response-Suppress' => 'OOF',
+           'Auto-Submitted'           => 'auto-generated',
+      ) do |format|
         format.text { render :text => template.render_plain(data) }
         format.html { render :text => template.render_html(data) }
       end
