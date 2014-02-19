@@ -110,8 +110,6 @@ GEM
     fastercsv (1.5.5)
     formtastic (2.2.1)
       actionpack (>= 3.0)
-    gelf (1.4.0)
-      json
     haml (4.0.4)
       tilt
     has_scope (0.5.1)
@@ -134,9 +132,6 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     libv8 (3.11.8.17)
-    lograge (0.2.0)
-      actionpack
-      activesupport
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -282,11 +277,9 @@ DEPENDENCIES
   delayed_job_active_record
   delayed_job_web
   diff-lcs
-  gelf
   hashie
   jquery-rails
   jquery-ui-rails
-  lograge
   omniauth-cas
   pg
   rails (= 3.2.16)
