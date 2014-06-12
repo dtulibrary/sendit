@@ -78,14 +78,14 @@ class TemplatesController < ApplicationController
   end
 
   def try
-    template = Template.new(:html => params[:html], :plain => params[:plain], :subject => params[:subject], :from => params[:from])
-    data     = JSON.parse(params[:data])
+    begin
+      template = Template.new(:html => params[:html], :plain => params[:plain], :subject => params[:subject], :from => params[:from])
+      data     = JSON.parse(params[:data])
 
-    respond_to do |format|
-      format.json do
-        begin
+      respond_to do |format|
+        format.json do
           email = template.to_email(data)
-
+          
           rendered = {
             :raw     => email.encoded,
             :from    => template.render_from(data),
@@ -93,19 +93,19 @@ class TemplatesController < ApplicationController
             :html    => template.render_html(data),
             :plain   => template.render_plain(data)
           }
-
+          
           if params[:send] == 'true'
             raise "To address cannot be empty" if params[:to].blank?
             email.to = params[:to]
             email.deliver
           end
-
+          
           render :json => rendered            
-
-        rescue Exception => e
-          render :text => ["<pre>", e.to_s, "", e.backtrace, "</pre>"].flatten.join("\n"), :status => :internal_server_error
+          
         end
       end
+    rescue Exception => e
+      render :text => ["<pre>", e.to_s, "", e.backtrace, "</pre>"].flatten.join("\n"), :status => :internal_server_error
     end
   end
 
