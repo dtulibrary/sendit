@@ -5,9 +5,10 @@
 <%= form_for @template, :remote => true do |f| %>
 <div class="row">
   <div class="span7">
-    <%= f.text_field :code, :style => 'width: 96%' %>
-    <%= f.text_field :from, :style => 'width: 96%' %>
-    <%= f.text_field :subject, :style => 'width: 96%' %>
+    <%= f.text_field :code,     :style => 'width: 96%' %>
+    <%= f.text_field :from,     :style => 'width: 96%' %>
+    <%= f.text_field :reply_to, :style => 'width: 96%' %>
+    <%= f.text_field :subject,  :style => 'width: 96%' %>
     <div class="tabbable">
       <ul class="nav nav-tabs">
         <li class="active"><a href="#tab-html" data-toggle="tab">HTML</a></li>
