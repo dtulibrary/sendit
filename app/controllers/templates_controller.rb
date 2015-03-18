@@ -11,10 +11,11 @@ class TemplatesController < ApplicationController
     @template = Template.new
     @template.from     = '<%= @from %>'
     @template.reply_to = '<%= @reply_to %>'
+    @template.cc       = '<%= @cc %>'
     @template.subject  = '<%= @subject %>'
     @template.html     = 'Here goes the html template'
     @template.plain    = 'Here goes the plain text template'
-    @template.example  = '{"to": "to@example.com", "from": "from@example.com", "reply_to": "reply_to@example.com", "subject": "Subject"}'
+    @template.example  = '{"to": "to@example.com", "from": "from@example.com", "reply_to": "reply_to@example.com", "cc": "cc@example.com", "subject": "Subject"}'
   end
 
   def edit

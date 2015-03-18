@@ -1,5 +1,5 @@
 class Template < ActiveRecord::Base
-  attr_accessible :active, :code, :displayed, :example, :from, :html, :plain, :subject, :reply_to
+  attr_accessible :active, :code, :displayed, :example, :from, :html, :plain, :subject, :reply_to, :cc
 
   validates :code,    :presence => true
   validates :html,    :presence => true
@@ -64,6 +64,7 @@ class Template < ActiveRecord::Base
       }
 
       mail_params[:reply_to] = data["reply_to"] if data["reply_to"]
+      mail_params[:cc] = data["cc"] if data["cc"]
 
       mail(mail_params) do |format|
         format.text { render :text => template.render_plain(data) }
