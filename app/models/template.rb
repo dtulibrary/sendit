@@ -1,5 +1,5 @@
 class Template < ActiveRecord::Base
-  attr_accessible :active, :code, :displayed, :example, :from, :html, :plain, :subject
+  attr_accessible :active, :code, :displayed, :example, :from, :html, :plain, :subject, :reply_to
 
   validates :code,    :presence => true
   validates :html,    :presence => true
@@ -55,12 +55,17 @@ class Template < ActiveRecord::Base
 
   class TemplateMailer < ActionMailer::Base
     def email(template, data)
-      mail(:from                      => template.render_from(data),
-           :to                        => data["to"],
-           :subject                   => template.render_subject(data),
-           'X-Auto-Response-Suppress' => 'OOF',
-           'Auto-Submitted'           => 'auto-generated',
-      ) do |format|
+      mail_params = {
+        :from                      => template.render_from(data),
+        :to                        => data["to"],
+        :subject                   => template.render_subject(data),
+        'X-Auto-Response-Suppress' => 'OOF',
+        'Auto-Submitted'           => 'auto-generated'
+      }
+
+      mail_params[:reply_to] = data["reply_to"] if data["reply_to"]
+
+      mail(mail_params) do |format|
         format.text { render :text => template.render_plain(data) }
         format.html { render :text => template.render_html(data) }
       end

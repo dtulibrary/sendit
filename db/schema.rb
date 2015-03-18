@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130604122603) do
+ActiveRecord::Schema.define(:version => 20150318114551) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20130604122603) do
     t.text     "example"
     t.boolean  "active",     :default => false
     t.boolean  "displayed",  :default => true
+    t.text     "reply_to"
   end
 
   add_index "templates", ["code"], :name => "index_templates_on_code"
