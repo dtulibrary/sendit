@@ -36,7 +36,7 @@ group :test, :development do
   gem 'simplecov', :require => false
   gem 'simplecov-html', :require => false
   gem 'simplecov-rcov', :require => false
-  gem 'debugger'
+  gem 'byebug'
 end
 
 # Deploy with Capistrano
