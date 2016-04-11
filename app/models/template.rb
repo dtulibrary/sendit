@@ -64,7 +64,8 @@ class Template < ActiveRecord::Base
       }
 
       mail_params[:reply_to] = data["reply_to"] if data["reply_to"]
-      mail_params[:cc] = data["cc"] if data["cc"]
+      mail_params[:cc]       = data["cc"] if data["cc"]
+      mail_params[:charset]  = data["charset"] if data["charset"]
 
       mail(mail_params) do |format|
         text_plain = template.render_plain(data)
