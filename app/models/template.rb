@@ -67,8 +67,10 @@ class Template < ActiveRecord::Base
       mail_params[:cc] = data["cc"] if data["cc"]
 
       mail(mail_params) do |format|
-        format.text { render :text => template.render_plain(data) }
-        format.html { render :text => template.render_html(data) }
+        text_plain = template.render_plain(data)
+        text_html  = template.render_html(data)
+        format.text { render :text => text_plain } unless text_plain.blank?
+        format.html { render :text => text_html } unless text_html.blank?
       end
     end
   end
