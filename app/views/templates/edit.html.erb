@@ -5,10 +5,15 @@
 <%= form_for @template, :remote => true do |f| %>
 <div class="row">
   <div class="span7">
+    <%= f.label :code %>
     <%= f.text_field :code,     :style => 'width: 96%' %>
+    <%= f.label :from %>
     <%= f.text_field :from,     :style => 'width: 96%' %>
+    <%= f.label :reply_to %>
     <%= f.text_field :reply_to, :style => 'width: 96%' %>
+    <%= f.label :cc, 'CC' %>
     <%= f.text_field :cc,       :style => 'width: 96%' %>
+    <%= f.label :subject %>
     <%= f.text_field :subject,  :style => 'width: 96%' %>
     <div class="tabbable">
       <ul class="nav nav-tabs">
@@ -26,7 +31,9 @@
     </div>
   </div>
   <div class="span5">
+    <%= f.label :example %>
     <%= f.text_area :example, :style => 'width: 96%; height: 400px' %>
+    <%= f.label :to %>
     <%= text_field_tag :to, '', :style => 'width: 96%' %>
   </div>
 </div>
