@@ -2,8 +2,6 @@ class Template < ActiveRecord::Base
   attr_accessible :active, :code, :displayed, :example, :from, :html, :plain, :subject, :reply_to, :cc
 
   validates :code,    :presence => true
-  validates :html,    :presence => true
-  validates :plain,   :presence => true
   validates :example, :presence => true
   validates :from,    :presence => true
   validates :subject, :presence => true
