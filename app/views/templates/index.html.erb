@@ -10,20 +10,22 @@
     </tr>
   </thead>
 
+  <%= link_to 'New template', new_template_path, :class => 'btn btn-primary' %>
+
   <% @templates.group_by(&:code).each do |group, templates| %>
   <tbody style="overflow: auto; border-top: 2px solid #333333;">
     <% templates.each_with_index do |template, i| %>
     <tr class="<%= 'success' if template.current? %>">
-      <td><%= template.code%></td>
+      <td><%= link_to template.code, template %></td>
       <td><%= time_ago_in_words(template.created_at) %> ago</td>
       <td><%= time_ago_in_words(template.updated_at) %> ago</td>
       <td><code><%= template.from %></code></td>
       <td><code><%= template.subject %></code></td>
       <td>
-        <%= link_to 'Edit', [:edit, template], :class => 'btn btn-mini' %>
-        <%= link_to 'Duplicate', [:duplicate, template], :class => 'btn btn-mini btn-info' %>
-        <%= link_to 'Destroy', template, :class => 'btn btn-mini btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
-        <%= link_to 'Activate', [:activate, template], :class => 'btn btn-mini btn-warning', data: { confirm: 'Are you sure?' } unless template.current? %>
+        <%= link_to 'Edit', [:edit, template], :class => 'btn btn-warning' %>
+        <%= link_to 'Duplicate', [:duplicate, template], :class => 'btn btn-info' %>
+        <%= link_to 'Destroy', template, :class => 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Activate', [:activate, template], :class => 'btn btn-success', data: { confirm: 'Are you sure?' } unless template.current? %>
       </td>
     </tr>
     <% end %>
@@ -33,4 +35,3 @@
 
 <br />
 
-<%= link_to 'New', new_template_path, :class => 'btn btn-mini' %>
