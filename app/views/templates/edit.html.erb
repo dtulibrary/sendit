@@ -5,8 +5,8 @@
 <%= form_for @template, :remote => true do |f| %>
   <div class="row">
     <div class="col-md-6">
-      <%= f.label :code %>
-      <%= f.text_field :code,     :class => 'form-control', :placeholder => 'Code' %>
+      <%= f.label 'Template name' %>
+      <%= f.text_field :code,     :class => 'form-control', :placeholder => 'Template name' %>
       <%= f.label :from %>
       <%= f.text_field :from,     :class => 'form-control', :placeholder => 'From' %>
       <%= f.label :reply_to %>
@@ -32,7 +32,8 @@
       </div>
     </div>
     <div class="col-md-6">
-      <%= f.label 'Example - when useing the "Try it!" button below' %>
+      <%= f.label :example  %>
+      <p>Use the "Try It" button below to use these example/test variables. This is what would be posted from DocDel in a normal operation. </p>
       <%= f.text_area :example, :class => 'form-control' %>
       <%= f.label 'To: (Required when using "Send It" button, but not save-able)' %>
       <%= text_field_tag :to, '', :class => 'form-control' %>
