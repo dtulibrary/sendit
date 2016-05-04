@@ -2,8 +2,6 @@ class Template < ActiveRecord::Base
   attr_accessible :active, :code, :displayed, :example, :from, :html, :plain, :subject, :reply_to, :cc
 
   validates :code,    :presence => true
-  validates :html,    :presence => true
-  validates :plain,   :presence => true
   validates :example, :presence => true
   validates :from,    :presence => true
   validates :subject, :presence => true
@@ -64,11 +62,14 @@ class Template < ActiveRecord::Base
       }
 
       mail_params[:reply_to] = data["reply_to"] if data["reply_to"]
-      mail_params[:cc] = data["cc"] if data["cc"]
+      mail_params[:cc]       = data["cc"] if data["cc"]
+      mail_params[:charset]  = data["charset"] if data["charset"]
 
       mail(mail_params) do |format|
-        format.text { render :text => template.render_plain(data) }
-        format.html { render :text => template.render_html(data) }
+        text_plain = template.render_plain(data)
+        text_html  = template.render_html(data)
+        format.text { render :text => text_plain } unless text_plain.blank?
+        format.html { render :text => text_html } unless text_html.blank?
       end
     end
   end
