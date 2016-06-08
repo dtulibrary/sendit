@@ -1,6 +1,6 @@
 FROM debian:7.10
 
-RUN apt-get update -qq && apt-get install -y \ 
+RUN apt-get update -qq && apt-get install -y \
   ruby \
   build-essential \
   libpq-dev \
