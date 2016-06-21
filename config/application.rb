@@ -69,10 +69,10 @@ module Tsushin
     config.stub_authentication = false;
 
     config.cas = {
-      :host => ''
+      :host => 'auth.dtu.dk/dtu'
     }
 
-    config.authorized_users =  []
+    config.authorized_users =  ['visa','jipe','romc']
 
     config.action_mailer.delivery_method = :file
     config.action_mailer.smtp_settings = {
