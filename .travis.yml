@@ -1,0 +1,12 @@
+sudo: required
+
+language: ruby
+
+services:
+  - docker
+
+before_install:
+  - docker build -t dtu/sendit .
+  - docker run -d -p 127.0.0.1:3000:3000 dtu/sendit /bin/sh -c "bundle exec rails s -p 3000 -b '0.0.0.0'"
+  - docker ps -a
+  - docker run dtu/sendit /bin/sh -c "bundle exec rspec"
