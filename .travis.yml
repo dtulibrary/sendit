@@ -13,3 +13,4 @@ before_install:
 
 script:
   - docker run dtu/sendit /bin/sh -c "RAILS_ENV=test bundle exec rake db:migrate db:test:prepare && rspec"
+
