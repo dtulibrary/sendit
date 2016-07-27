@@ -72,7 +72,7 @@ module Tsushin
       :host => 'auth.dtu.dk/dtu'
     }
 
-    config.authorized_users =  ['visa','jipe','romc']
+    config.authorized_users =  ['visa','jipe','romc','tlni']
 
     config.action_mailer.delivery_method = :file
     config.action_mailer.smtp_settings = {
