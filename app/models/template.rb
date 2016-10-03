@@ -17,6 +17,8 @@ class Template < ActiveRecord::Base
   end
 
   class Context
+    include ActionView::Helpers::TextHelper
+
     def initialize(hash)
       mash = Hashie::Mash.new(hash)
       mash.each_pair do |key, value|
